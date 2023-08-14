@@ -3,10 +3,7 @@ library youtube_scrape_api;
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as parser;
 import 'package:youtube_scrape_api/helpers/helpers_extention.dart';
-import 'package:youtube_scrape_api/models/channel.dart';
-import 'package:youtube_scrape_api/models/playlist.dart';
 import 'package:youtube_scrape_api/models/video_page.dart';
-import 'package:youtube_scrape_api/retry.dart';
 import 'package:collection/collection.dart';
 import 'package:xml2json/xml2json.dart';
 import 'dart:convert';
@@ -17,7 +14,7 @@ import 'models/video_data.dart';
 
 class YoutubeDataApi {
   ///Continue token for load more videos on youtube search
-  String? _searchToken;
+  //String? _searchToken;
 
   ///Continue token for load more videos on youtube channel
   String? _channelToken;
@@ -50,14 +47,14 @@ class YoutubeDataApi {
           ?.getList('contents');
 
       var contentList = contents?.toList();
-      contentList?.forEach((element) {
+      for (var element in contentList!) {
         if (element.containsKey('videoRenderer')) {
           ///Element is Video
           Video video = Video.fromMap(element);
           list.add(video);
         }
-      });
-      _searchToken = _getContinuationToken(jsonMap);
+      }
+      //_searchToken = _getContinuationToken(jsonMap);
     }
 
     return list;
@@ -121,10 +118,10 @@ class YoutubeDataApi {
           ?.getList('items');
       var secondList = secondContents != null ? secondContents.toList() : [];
       var contentList = [...firstList, ...secondList];
-      contentList.forEach((element) {
+      for (var element in contentList) {
         Video video = Video.fromMap(element);
         list.add(video);
-      });
+      }
     }
     return list;
   }
@@ -169,10 +166,10 @@ class YoutubeDataApi {
           ?.get('expandedShelfContentsRenderer')
           ?.getList('items');
       var contentList = contents != null ? contents.toList() : [];
-      contentList.forEach((element) {
+      for (var element in contentList) {
         Video video = Video.fromMap(element);
         list.add(video);
-      });
+      }
     }
     return list;
   }
@@ -218,10 +215,10 @@ class YoutubeDataApi {
           ?.getList('items');
       var contentList = contents != null ? contents.toList() : [];
 
-      contentList.forEach((element) {
+      for (var element in contentList) {
         Video video = Video.fromMap(element);
         list.add(video);
-      });
+      }
     }
     return list;
   }
@@ -265,10 +262,10 @@ class YoutubeDataApi {
           ?.get('expandedShelfContentsRenderer')
           ?.getList('items');
       var contentList = contents != null ? contents.toList() : [];
-      contentList.forEach((element) {
+      for (var element in contentList) {
         Video video = Video.fromMap(element);
         list.add(video);
-      });
+      }
     }
     return list;
   }
@@ -285,9 +282,9 @@ class YoutubeDataApi {
     myTranformer.parse(body);
     var json = myTranformer.toGData();
     List suggestionsData = jsonDecode(json)['toplevel']['CompleteSuggestion'];
-    suggestionsData.forEach((suggestion) {
+    for (var suggestion in suggestionsData) {
       suggestions.add(suggestion['suggestion']['data'].toString());
-    });
+    }
     return suggestions;
   }
 
@@ -344,10 +341,10 @@ class YoutubeDataApi {
           ?.get('playlistVideoListRenderer')
           ?.getList('contents');
       var contentList = contents!.toList();
-      contentList.forEach((element) {
+      for (var element in contentList) {
         Video video = Video.fromMap(element);
         videos.add(video);
-      });
+      }
       _playListToken = _getPlayListContinuationToken(jsonMap);
     }
     return videos;
@@ -382,12 +379,12 @@ class YoutubeDataApi {
 
       List<Video> videosList = [];
 
-      contentList?.forEach((element) {
+      for (var element in contentList!) {
         if (element['compactVideoRenderer']?['title']?['simpleText'] != null) {
           Video video = Video.fromMap(element);
           videosList.add(video);
         }
-      });
+      }
 
       videoData = VideoData(
           video: VideoPage.fromMap(contents, videoId), videosList: videosList);
@@ -396,10 +393,10 @@ class YoutubeDataApi {
   }
 
   ///Load more videos in youtube channel
-  Future<List<Video>> loadMoreInChannel(String API_KEY) async {
+  Future<List<Video>> loadMoreInChannel(String apikey) async {
     List<Video> videos = [];
     var client = http.Client();
-    var url = 'https://www.youtube.com/youtubei/v1/browse?key=$API_KEY';
+    var url = 'https://www.youtube.com/youtubei/v1/browse?key=$apikey';
     var body = {
       'context': const {
         'client': {
@@ -419,20 +416,20 @@ class YoutubeDataApi {
         ?.getList('continuationItems');
     if (contents != null) {
       var contentList = contents.toList();
-      contentList.forEach((element) {
+      for (var element in contentList) {
         Video video = Video.fromMap(element);
         videos.add(video);
-      });
+      }
       _channelToken = _getChannelContinuationToken(jsonMap);
     }
     return videos;
   }
 
   ///Load more videos in youtube playlist
-  Future<List<Video>> loadMoreInPlayList(String API_KEY) async {
+  Future<List<Video>> loadMoreInPlayList(String apikey) async {
     List<Video> list = [];
     var client = http.Client();
-    var url = 'https://www.youtube.com/youtubei/v1/browse?key=$API_KEY';
+    var url = 'https://www.youtube.com/youtubei/v1/browse?key=$apikey';
     var body = {
       'context': const {
         'client': {
@@ -452,10 +449,10 @@ class YoutubeDataApi {
         ?.getList('continuationItems');
     if (contents != null) {
       var contentList = contents.toList();
-      contentList.forEach((element) {
+      for (var element in contentList) {
         Video video = Video.fromMap(element);
         list.add(video);
-      });
+      }
       _playListToken = _getChannelContinuationToken(jsonMap);
     }
     return list;

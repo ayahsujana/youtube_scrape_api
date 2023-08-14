@@ -1,7 +1,8 @@
 name: youtube_scrape_api
-description: A new Flutter package project.
+description: A Flutter package for fetching complete data from YouTube. Supports Search, Trending, Channels, Playlists and Video Data.
 version: 0.0.1
-homepage:
+homepage: https://github.com/modwedar/YoutubeDataApi
+repository: https://github.com/modwedar/YoutubeDataApi
 
 environment:
   sdk: '>=3.0.6 <4.0.0'

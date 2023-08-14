@@ -49,8 +49,8 @@ class Video {
               ['text'],
           thumbnails: thumbnails,
           views: (lengthText == null)
-              ? "Views " +
-                  map!['videoRenderer']['viewCountText']['runs'][0]['text']
+              ? "Views ${map!['videoRenderer']['viewCountText']['runs'][0]['text']}"
+                  
               : simpleText);
     } else if (map?.containsKey("compactVideoRenderer") ?? false) {
       //Related videos
