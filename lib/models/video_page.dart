@@ -1,4 +1,3 @@
-
 class VideoPage {
   ///Get video id from video page
   String? videoId;
@@ -54,9 +53,9 @@ class VideoPage {
     if (views != null) {
       viewers = views?[0]['text'];
     } else {
-      viewers = map?['results']['results']['contents'][0]
-              ['videoPrimaryInfoRenderer']['viewCount']
-          ['videoViewCountRenderer']['shortViewCount']['simpleText'];
+      viewers = map?['results']?['results']?['contents'][0]
+              ?['videoPrimaryInfoRenderer']?['viewCount']
+          ?['videoViewCountRenderer']?['shortViewCount']?['simpleText'];
     }
     return VideoPage(
         videoId: videoId,

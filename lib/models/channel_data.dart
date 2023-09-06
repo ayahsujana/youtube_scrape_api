@@ -17,6 +17,8 @@ class ChannelData {
         ?.get('c4TabbedHeaderRenderer')
         ?.get('avatar')
         ?.getList('thumbnails');
+    String channelName = headers
+        ?.get('c4TabbedHeaderRenderer')?['title'];    
     String avatar = thumbnails?.elementAtSafe(thumbnails.length - 1)?['url'];
     String? banner = headers
         ?.get('c4TabbedHeaderRenderer')
@@ -41,6 +43,7 @@ class ChannelData {
     return ChannelData(
         videosList: videoList,
         channel: ChannelPage(
+            channelName: channelName,
             subscribers: (subscribers != null) ? subscribers : " ",
             avatar: avatar,
             banner: banner));

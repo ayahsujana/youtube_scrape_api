@@ -1,3 +1,7 @@
-## 0.0.1
+## [0.0.3]
 
-* TODO: Describe initial release.
+    - With fix some bugs
+
+## [0.0.1]
+
+     - create package

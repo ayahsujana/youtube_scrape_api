@@ -304,8 +304,8 @@ class YoutubeDataApi {
         .toList(growable: false);
     var initialData =
         scriptText.firstWhereOrNull((e) => e.contains('var ytInitialData = '));
-    initialData ??= scriptText
-        .firstWhereOrNull((e) => e.contains('window["ytInitialData"] ='));
+    initialData ??=
+        scriptText.firstWhereOrNull((e) => e.contains("window['ytUrl'] = "));
     var jsonMap = extractJson(initialData!);
     if (jsonMap != null) {
       ChannelData channelData = ChannelData.fromMap(jsonMap);

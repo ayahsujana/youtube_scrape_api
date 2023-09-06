@@ -16,6 +16,9 @@ class Video {
   ///Youtube video views
   String? views;
 
+  ///Youtube video upload date
+  String? uploadDate;
+
   ///Youtube video thumbnail
   List<Thumbnail>? thumbnails;
 
@@ -25,12 +28,47 @@ class Video {
       this.title,
       this.channelName,
       this.views,
+      this.uploadDate,
       this.thumbnails});
 
   factory Video.fromMap(Map<String, dynamic>? map) {
     List<Thumbnail>? thumbnails;
-    if (map?.containsKey("videoRenderer") ?? false) {
+    if (map?.containsKey("richItemRenderer") ?? false) {
+      //video channel
+      var uploadDate = map?['richItemRenderer']['content']['videoRenderer']
+          ['publishedTimeText']['simpleText'];
+      var lengthText =
+          map?['richItemRenderer']['content']['videoRenderer']?['lengthText'];
+      thumbnails = [];
+      map?['richItemRenderer']['content']['videoRenderer']['thumbnail']
+              ['thumbnails']
+          .forEach((thumbnail) {
+        thumbnails!.add(Thumbnail(
+            url: thumbnail['url'],
+            width: thumbnail['width'],
+            height: thumbnail['height']));
+      });
+      // var viewtext = map?['richItemRenderer']?['content']?['videoRenderer']?['shortViewCountText']['runs'];
+      String? uploadDates;
+      if (uploadDate != null) {
+        uploadDates = uploadDate;
+      } else {
+        uploadDates = '';
+      }
+      return Video(
+          videoId: map?['richItemRenderer']['content']['videoRenderer']
+              ?['videoId'],
+          duration: lengthText?['simpleText'],
+          title: map?['richItemRenderer']['content']['videoRenderer']?['title']
+              ?['runs']?[0]?['text'],
+          channelName: '',
+          thumbnails: thumbnails,
+          views: map?['richItemRenderer']?['content']?['videoRenderer']
+              ?['shortViewCountText']?['simpleText'],
+          uploadDate: uploadDates);
+    } else if (map?.containsKey("videoRenderer") ?? false) {
       //Trending and search videos
+      var uploadDate = map?['videoRenderer']?['publishedTimeText'];
       var lengthText = map?['videoRenderer']?['lengthText'];
       var simpleText =
           map?['videoRenderer']?['shortViewCountText']?['simpleText'];
@@ -41,6 +79,12 @@ class Video {
             width: thumbnail['width'],
             height: thumbnail['height']));
       });
+      String? uploadDates;
+      if (uploadDate != null) {
+        uploadDates = uploadDate?['simpleText'];
+      } else {
+        uploadDates = '';
+      }
       return Video(
           videoId: map?['videoRenderer']?['videoId'],
           duration: (lengthText == null) ? 'LIVE' : lengthText?['simpleText'],
@@ -50,10 +94,11 @@ class Video {
           thumbnails: thumbnails,
           views: (lengthText == null)
               ? "Views ${map!['videoRenderer']['viewCountText']['runs'][0]['text']}"
-                  
-              : simpleText);
+              : simpleText,
+          uploadDate: uploadDates);
     } else if (map?.containsKey("compactVideoRenderer") ?? false) {
       //Related videos
+      var uploadDate = map?['compactVideoRenderer']['publishedTimeText'];
       thumbnails = [];
       map?['compactVideoRenderer']['thumbnail']['thumbnails']
           .forEach((thumbnail) {
@@ -66,6 +111,14 @@ class Video {
       var viewtext =
           map?['compactVideoRenderer']?['shortViewCountText']['runs'];
       String? viewers;
+      String? uploadDates;
+      if (uploadDate != null) {
+        uploadDates = uploadDate?['simpleText'];
+        print('PUBLISH OK ==>> $uploadDates');
+      } else {
+        uploadDates = '';
+        print('PUBLISH NO ===>> $uploadDates');
+      }
       if (viewtext != null) {
         viewers = viewtext?[0]['text'];
       } else {
@@ -79,7 +132,8 @@ class Video {
           thumbnails: thumbnails,
           channelName: map?['compactVideoRenderer']?['shortBylineText']?['runs']
               ?[0]?['text'],
-          views: viewers);
+          views: viewers,
+          uploadDate: uploadDates);
     } else if (map?.containsKey("gridVideoRenderer") ?? false) {
       String? simpleText =
           map?['gridVideoRenderer']['shortViewCountText']?['simpleText'];
