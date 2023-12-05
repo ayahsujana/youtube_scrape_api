@@ -46,16 +46,33 @@ class VideoPage {
       this.channelId});
 
   factory VideoPage.fromMap(Map<String, dynamic>? map, String videoId) {
+    var likes = map?['results']['results']['contents'][0]
+                ['videoPrimaryInfoRenderer']['videoActions']['menuRenderer']
+            ['topLevelButtons'][0]['segmentedLikeDislikeButtonRenderer']
+        ['likeButton']['toggleButtonRenderer']['defaultText']['simpleText'];
     var views = map?['results']['results']['contents'][0]
             ['videoPrimaryInfoRenderer']['viewCount']['videoViewCountRenderer']
         ['viewCount']['runs'];
+    var oldViews = map?['results']['results']['contents'][0]
+            ['videoPrimaryInfoRenderer']['viewCount']['videoViewCountRenderer']
+        ['shortViewCount'];
+        
     String? viewers;
-    if (views != null) {
-      viewers = views?[0]['text'];
+    String? likers;
+
+    if (likes == null) {
+      likers = '0';
     } else {
-      viewers = map?['results']?['results']?['contents'][0]
-              ?['videoPrimaryInfoRenderer']?['viewCount']
-          ?['videoViewCountRenderer']?['shortViewCount']?['simpleText'];
+      likers = likes;
+    }
+    if (views != null) {
+      viewers = views?[0]['text'] + views?[1]['text'];
+    } else if (oldViews != null) {
+      viewers = oldViews['simpleText'];
+    } else {
+      viewers = map?['results']['results']['contents'][0]
+              ['videoPrimaryInfoRenderer']['viewCount']
+          ['videoViewCountRenderer']['viewCount']['simpleText'];
     }
     return VideoPage(
         videoId: videoId,
@@ -64,13 +81,13 @@ class VideoPage {
         channelName: map?['results']['results']['contents'][1]['videoSecondaryInfoRenderer']
             ['owner']['videoOwnerRenderer']['title']['runs'][0]['text'],
         viewCount: viewers,
-        subscribeCount: map?['results']?['results']?['contents']?[1]?['videoSecondaryInfoRenderer']?['owner']
-            ?['videoOwnerRenderer']?['subscriberCountText']?['simpleText'],
-        likeCount: map?['results']['results']['contents'][0]['videoPrimaryInfoRenderer']['videoActions']
-                ['menuRenderer']['topLevelButtons'][0]['segmentedLikeDislikeButtonRenderer']
-            ['likeButton']['toggleButtonRenderer']['defaultText']['simpleText'],
+        subscribeCount: map?['results']?['results']?['contents']?[1]
+                ?['videoSecondaryInfoRenderer']?['owner']?['videoOwnerRenderer']
+            ?['subscriberCountText']?['simpleText'],
+        likeCount: likers,
         unlikeCount: '',
-        description: map?['results']?['results']?['contents']?[1]?['videoSecondaryInfoRenderer']?['attributedDescription']?['content'],
+        description: map?['results']?['results']?['contents']?[1]
+            ?['videoSecondaryInfoRenderer']?['attributedDescription']?['content'],
         date: map?['results']['results']['contents'][0]['videoPrimaryInfoRenderer']['dateText']['simpleText'],
         channelThumb: map?['results']['results']['contents'][1]['videoSecondaryInfoRenderer']['owner']['videoOwnerRenderer']['thumbnail']['thumbnails'][1]['url'],
         channelId: map?['results']['results']['contents'][1]['videoSecondaryInfoRenderer']['owner']['videoOwnerRenderer']['navigationEndpoint']['browseEndpoint']['browseId']);

@@ -36,7 +36,7 @@ class Video {
     if (map?.containsKey("richItemRenderer") ?? false) {
       //video channel
       var uploadDate = map?['richItemRenderer']['content']['videoRenderer']
-          ['publishedTimeText']['simpleText'];
+          ?['publishedTimeText'];
       var lengthText =
           map?['richItemRenderer']['content']['videoRenderer']?['lengthText'];
       thumbnails = [];
@@ -48,12 +48,20 @@ class Video {
             width: thumbnail['width'],
             height: thumbnail['height']));
       });
-      // var viewtext = map?['richItemRenderer']?['content']?['videoRenderer']?['shortViewCountText']['runs'];
+      var viewtext = map?['richItemRenderer']?['content']?['videoRenderer']
+          ?['shortViewCountText']?['runs'];
       String? uploadDates;
+      String? viewers;
       if (uploadDate != null) {
-        uploadDates = uploadDate;
+        uploadDates = uploadDate['simpleText'];
       } else {
         uploadDates = '';
+      }
+      if (viewtext != null) {
+        viewers = viewtext[0]['text'] + viewtext[1]['text'];
+      } else {
+        viewers = map?['richItemRenderer']?['content']?['videoRenderer']
+            ?['shortViewCountText']?['simpleText'];
       }
       return Video(
           videoId: map?['richItemRenderer']['content']['videoRenderer']
@@ -63,8 +71,7 @@ class Video {
               ?['runs']?[0]?['text'],
           channelName: '',
           thumbnails: thumbnails,
-          views: map?['richItemRenderer']?['content']?['videoRenderer']
-              ?['shortViewCountText']?['simpleText'],
+          views: viewers,
           uploadDate: uploadDates);
     } else if (map?.containsKey("videoRenderer") ?? false) {
       //Trending and search videos
@@ -109,18 +116,16 @@ class Video {
       });
       var lengthText = map?['compactVideoRenderer']?['lengthText'];
       var viewtext =
-          map?['compactVideoRenderer']?['shortViewCountText']['runs'];
+          map?['compactVideoRenderer']?['shortViewCountText']?['runs'];
       String? viewers;
       String? uploadDates;
       if (uploadDate != null) {
         uploadDates = uploadDate?['simpleText'];
-        print('PUBLISH OK ==>> $uploadDates');
       } else {
         uploadDates = '';
-        print('PUBLISH NO ===>> $uploadDates');
       }
       if (viewtext != null) {
-        viewers = viewtext?[0]['text'];
+        viewers = viewtext?[0]['text'] + viewtext?[1]['text'];
       } else {
         viewers =
             map?['compactVideoRenderer']?['shortViewCountText']?['simpleText'];
@@ -151,6 +156,34 @@ class Video {
               ['thumbnailOverlayTimeStatusRenderer']['text']['simpleText'],
           thumbnails: thumbnails,
           views: (simpleText != null) ? simpleText : "???");
+    } else if (map?.containsKey("playlistVideoRenderer") ?? false) {
+      var uploadDate = map?['playlistVideoRenderer']?['publishedTimeText'];
+      var lengthText = map?['playlistVideoRenderer']?['lengthText'];
+      String? simpleText =
+          map?['playlistVideoRenderer']['shortViewCountText']?['simpleText'];
+      thumbnails = [];
+      map?['playlistVideoRenderer']['thumbnail']['thumbnails']
+          .forEach((thumbnail) {
+        thumbnails!.add(Thumbnail(
+            url: thumbnail['url'],
+            width: thumbnail['width'],
+            height: thumbnail['height']));
+      });
+      String? uploadDates;
+      if (uploadDate != null) {
+        uploadDates = uploadDate;
+      } else {
+        uploadDates = '';
+      }
+      return Video(
+          videoId: map?['playlistVideoRenderer']['videoId'],
+          title: map?['playlistVideoRenderer']['title']['runs'][0]['text'],
+          duration: map?['playlistVideoRenderer']['thumbnailOverlays'][0]
+              ['thumbnailOverlayTimeStatusRenderer']['text']['simpleText'],
+          thumbnails: thumbnails,
+          views: map?['playlistVideoRenderer']['title']['accessibility']
+              ['accessibilityData']['label'],
+          uploadDate: uploadDates);
     }
     return Video();
   }

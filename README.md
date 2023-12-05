@@ -20,14 +20,11 @@ To use this plugin, add `youtube_scrape_api` as a [dependency in your pubspec.ya
 
 ### Example
 
-[<img src="https://raw.githubusercontent.com/modwedar/FlutterTube/master/dev/phoneScreenshots/1.jpg" width=280>](https://raw.githubusercontent.com/modwedar/FlutterTube/master/dev/phoneScreenshots/1.jpg)
-[<img src="https://raw.githubusercontent.com/modwedar/FlutterTube/master/dev/phoneScreenshots/2.jpg" width=280>](https://raw.githubusercontent.com/modwedar/FlutterTube/master/dev/phoneScreenshots/2.jpg)
-[<img src="https://raw.githubusercontent.com/modwedar/FlutterTube/master/dev/phoneScreenshots/3.jpg" width=280>](https://raw.githubusercontent.com/modwedar/FlutterTube/master/dev/phoneScreenshots/3.jpg)
-[<img src="https://raw.githubusercontent.com/modwedar/FlutterTube/master/dev/phoneScreenshots/4.jpg" width=280>](https://raw.githubusercontent.com/modwedar/FlutterTube/master/dev/phoneScreenshots/4.jpg)
-[<img src="https://raw.githubusercontent.com/modwedar/FlutterTube/master/dev/phoneScreenshots/5.jpg" width=280>](https://raw.githubusercontent.com/modwedar/FlutterTube/master/dev/phoneScreenshots/5.jpg)
-[<img src="https://raw.githubusercontent.com/modwedar/FlutterTube/master/dev/phoneScreenshots/6.jpg" width=280>](https://raw.githubusercontent.com/modwedar/FlutterTube/master/dev/phoneScreenshots/6.jpg)
-[<img src="https://raw.githubusercontent.com/modwedar/FlutterTube/master/dev/phoneScreenshots/7.jpg" width=280>](https://raw.githubusercontent.com/modwedar/FlutterTube/master/dev/phoneScreenshots/7.jpg)
-[<img src="https://raw.githubusercontent.com/modwedar/FlutterTube/master/dev/phoneScreenshots/10.jpg" width=280>](https://raw.githubusercontent.com/modwedar/FlutterTube/master/dev/phoneScreenshots/10.jpg)
+[<img src="https://ayahsujana.my.id/uploads/1.jpeg" width=280>](https://ayahsujana.my.id/uploads/1.jpeg)
+[<img src="https://ayahsujana.my.id/uploads/2.jpeg" width=280>](https://ayahsujana.my.id/uploads/2.jpeg)
+[<img src="https://ayahsujana.my.id/uploads/3.jpeg" width=280>](https://ayahsujana.my.id/uploads/3.jpeg)
+[<img src="https://ayahsujana.my.id/uploads/4.jpeg" width=280>](https://ayahsujana.my.id/uploads/4.jpeg)
+[<img src="https://ayahsujana.my.id/uploads/5.jpeg" width=280>](https://ayahsujana.my.id/uploads/5.jpeg)
 
 To search for videos or channels or playlists
 ```dart
