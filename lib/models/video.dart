@@ -158,9 +158,6 @@ class Video {
           views: (simpleText != null) ? simpleText : "???");
     } else if (map?.containsKey("playlistVideoRenderer") ?? false) {
       var uploadDate = map?['playlistVideoRenderer']?['publishedTimeText'];
-      var lengthText = map?['playlistVideoRenderer']?['lengthText'];
-      String? simpleText =
-          map?['playlistVideoRenderer']['shortViewCountText']?['simpleText'];
       thumbnails = [];
       map?['playlistVideoRenderer']['thumbnail']['thumbnails']
           .forEach((thumbnail) {

@@ -1,3 +1,7 @@
+## [0.0.6]
+
+    - Fixes like count
+
 ## [0.0.5]
 
     - Fixes some bugs on api

@@ -26,7 +26,6 @@ class _SearchPageState extends State<SearchPage> {
   bool isLoading = false;
   bool firstLoad = true;
   final searchCubit = SearchCubit();
-  //String API_KEY = "AIzaSyCLLLyifMf-xaDD6P9bBIF5hO2HK3nZw7k";
   String query = '';
 
   @override

@@ -47,23 +47,25 @@ class VideoPage {
 
   factory VideoPage.fromMap(Map<String, dynamic>? map, String videoId) {
     var likes = map?['results']['results']['contents'][0]
-                ['videoPrimaryInfoRenderer']['videoActions']['menuRenderer']
-            ['topLevelButtons'][0]['segmentedLikeDislikeButtonRenderer']
-        ['likeButton']['toggleButtonRenderer']['defaultText']['simpleText'];
+            ['videoPrimaryInfoRenderer']['videoActions']['menuRenderer']
+        ['topLevelButtons'][0];
     var views = map?['results']['results']['contents'][0]
             ['videoPrimaryInfoRenderer']['viewCount']['videoViewCountRenderer']
         ['viewCount']['runs'];
     var oldViews = map?['results']['results']['contents'][0]
             ['videoPrimaryInfoRenderer']['viewCount']['videoViewCountRenderer']
         ['shortViewCount'];
-        
+
     String? viewers;
     String? likers;
 
-    if (likes == null) {
+    if (likes == []) {
       likers = '0';
     } else {
-      likers = likes;
+      likers = likes['segmentedLikeDislikeButtonViewModel']
+                ['likeButtonViewModel']['likeButtonViewModel']
+            ['toggleButtonViewModel']['toggleButtonViewModel']
+        ['defaultButtonViewModel']['buttonViewModel']['title'];
     }
     if (views != null) {
       viewers = views?[0]['text'] + views?[1]['text'];
