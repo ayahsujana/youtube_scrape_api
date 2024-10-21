@@ -5,7 +5,8 @@
     - Fixes banner
     - Fixes subscribe counts
     - Add Video counts channel
-    
+    - Update some library
+
 ## [0.0.6]
 
     - Fixes like count
