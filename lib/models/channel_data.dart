@@ -10,21 +10,43 @@ class ChannelData {
 
   factory ChannelData.fromMap(Map<String, dynamic> map) {
     var headers = map.get('header');
-    String? subscribers = headers
-        ?.get('c4TabbedHeaderRenderer')
-        ?.get('subscriberCountText')?['simpleText'];
-    var thumbnails = headers
-        ?.get('c4TabbedHeaderRenderer')
+    var metaSubs = headers
+        ?.get('pageHeaderRenderer')
+        ?.get('content')
+        ?.get('pageHeaderViewModel')
+        ?.get('metadata')
+        ?.get('contentMetadataViewModel')
+        ?.getList('metadataRows')?[1];
+        
+    String? subscribers =
+        metaSubs?.getList('metadataParts')?[0].get('text')?['content'];
+
+    String? videoCounts =
+        metaSubs?.getList('metadataParts')?[1].get('text')?['content'];
+
+    String channelName = headers?.get('pageHeaderRenderer')?['pageTitle'];
+
+    String avatar = headers
+        ?.get('pageHeaderRenderer')
+        ?.get('content')
+        ?.get('pageHeaderViewModel')
+        ?.get('image')
+        ?.get('decoratedAvatarViewModel')
         ?.get('avatar')
-        ?.getList('thumbnails');
-    String channelName = headers
-        ?.get('c4TabbedHeaderRenderer')?['title'];    
-    String avatar = thumbnails?.elementAtSafe(thumbnails.length - 1)?['url'];
+        ?.get('avatarViewModel')
+        ?.get('image')
+        ?.getList('sources')?.first['url'];
+
     String? banner = headers
-        ?.get('c4TabbedHeaderRenderer')
+        ?.get('pageHeaderRenderer')
+        ?.get('content')
+        ?.get('pageHeaderViewModel')
         ?.get('banner')
-        ?.getList('thumbnails')
+        ?.get('imageBannerViewModel')
+        ?.get('image')
+        ?.getList('sources')
         ?.first['url'];
+
     var contents = map
         .get('contents')
         ?.get('twoColumnBrowseResultsRenderer')
@@ -45,7 +67,8 @@ class ChannelData {
         channel: ChannelPage(
             channelName: channelName,
             subscribers: (subscribers != null) ? subscribers : " ",
-            avatar: avatar,
+            videoCounts: (videoCounts != null) ? videoCounts : " ",
+            avatar: (avatar != null) ? avatar : " ",	
             banner: banner));
   }
 }

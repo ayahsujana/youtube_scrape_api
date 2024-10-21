@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pod_player/pod_player.dart';
+import 'package:last_pod_player/last_pod_player.dart';
 
 class PodPlayerVideos extends StatefulWidget {
   const PodPlayerVideos({

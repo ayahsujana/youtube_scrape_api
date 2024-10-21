@@ -25,7 +25,7 @@ class SettingsOption extends StatelessWidget {
           ? null
           : Icon(
               icon,
-              color: Theme.of(context).colorScheme.onBackground,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
       title: KhmertracksTitle(title),
       subtitle: subtitle != null

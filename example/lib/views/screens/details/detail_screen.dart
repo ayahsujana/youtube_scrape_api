@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+import 'package:last_pod_player/last_pod_player.dart';
 import 'package:skibidiwartube/cubit/detail/detail_cubit.dart';
 import 'package:skibidiwartube/cubit/favorite/favorite_videos.dart';
 import 'package:skibidiwartube/cubit/following/following_channel.dart';
@@ -10,8 +12,6 @@ import 'package:skibidiwartube/widget/custom_route.dart';
 import 'package:skibidiwartube/widget/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
-import 'package:pod_player/pod_player.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:skibidiwartube/widget/screen_custom.dart';
 

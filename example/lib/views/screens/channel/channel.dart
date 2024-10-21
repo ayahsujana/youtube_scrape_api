@@ -145,11 +145,15 @@ class _ChannelContentPageState extends State<ChannelContentPage> {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w600),
+                                fontSize: 16, fontWeight: FontWeight.w600),
                           ),
                           Text(
                             widget.channelData.channel.subscribers!,
-                            style: const TextStyle(fontSize: 13),
+                            style: const TextStyle(fontSize: 11),
+                          ),
+                          Text(
+                            widget.channelData.channel.videoCounts!,
+                            style: const TextStyle(fontSize: 11),
                           )
                         ],
                       ),
@@ -210,8 +214,7 @@ class _ChannelContentPageState extends State<ChannelContentPage> {
                 itemBuilder: (context, index) {
                   Video video = contentList[index];
                   return InkWell(
-                    onTap: () =>
-                       Get.to(DetailScreen(
+                    onTap: () => Get.to(DetailScreen(
                       videoId: video.videoId!,
                       duration: video.duration!,
                       viewer: video.uploadDate!.isEmpty,

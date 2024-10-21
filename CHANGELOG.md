@@ -1,3 +1,11 @@
+## [0.0.7]
+
+    - Fixes name channel
+    - Fixes avatar
+    - Fixes banner
+    - Fixes subscribe counts
+    - Add Video counts channel
+    
 ## [0.0.6]
 
     - Fixes like count

@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 6.0.5+605
 
 environment:
-  sdk: '>=3.1.5 <4.0.0'
+  sdk: '>=3.4.0 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -51,8 +51,7 @@ dependencies:
   lottie: ^2.3.2
   line_icons: ^2.0.1
   material_design_icons_flutter: ^7.0.7296
-  package_info_plus: ^4.2.0
-  pod_player: ^0.2.1
+  last_pod_player: ^0.0.3
   responsive_builder: ^0.7.0
   share_plus: ^7.2.1
   shared_preferences: ^2.2.2
@@ -65,7 +64,10 @@ dependencies:
     # the parent directory to use the current plugin's version.
     path: ../
   flutter_launcher_icons: ^0.13.1
-  in_app_review: ^2.0.6
+
+dependency_overrides:
+  fading_edge_scrollview: ^4.1.1
+  win32: ^5.5.4
 
 dev_dependencies:
   flutter_test:

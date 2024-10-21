@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:in_app_review/in_app_review.dart';
 import 'package:skibidiwartube/cubit/favorite/favorite_videos.dart';
 import 'package:skibidiwartube/cubit/following/following_channel.dart';
 import 'package:skibidiwartube/utils/constants/app_info.dart';
@@ -28,7 +27,6 @@ class RootBottomNav extends StatefulWidget {
 
 class _RootBottomNavState extends State<RootBottomNav> {
   int selectedIndex = 0;
-  final InAppReview inAppReview = InAppReview.instance;
   bool isPaused = false;
 
   updateIndex(int newIndex) {
@@ -42,13 +40,6 @@ class _RootBottomNavState extends State<RootBottomNav> {
     context.read<FavoriteVideoCubit>().fetchFavorite();
     context.read<FollowingCubit>().getAllFollowing();
     Screen.setPortrait();
-    ratemyApps();
-  }
-
-  void ratemyApps() async {
-    if (await inAppReview.isAvailable()) {
-      inAppReview.requestReview();
-    }
   }
 
   @override
@@ -128,9 +119,6 @@ class _RootBottomNavState extends State<RootBottomNav> {
             TextButton(
               onPressed: () {
                 Navigator.pop(context, true);
-                inAppReview.openStoreListing(
-                  appStoreId: packageName,
-                );
               },
               child: Text(
                 "RATE",

@@ -2,7 +2,6 @@ import 'package:skibidiwartube/views/screens/privacy/privacy.dart';
 import 'package:skibidiwartube/views/screens/privacy/terms.dart';
 import 'package:skibidiwartube/widget/annotate.dart';
 import 'package:get/get.dart';
-import 'package:in_app_review/in_app_review.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:skibidiwartube/data/enum/box_types.dart';
 import 'package:skibidiwartube/utils/constants/constants.dart';
@@ -25,7 +24,6 @@ import '../../../utils/constants/app_info.dart';
 
 class Settings extends StatelessWidget {
   Settings({super.key});
-  final InAppReview inAppReview = InAppReview.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -86,8 +84,7 @@ class Settings extends StatelessWidget {
                           title: 'Rate the app',
                           subtitle:
                               'Love this app? Give us you good review and 5 star',
-                          onTap: () => inAppReview.openStoreListing(
-                              appStoreId: packageName),
+                          onTap: () {},
                         ),
                         Divider(color: Colors.grey.withOpacity(0.2)),
                         SettingsOption(

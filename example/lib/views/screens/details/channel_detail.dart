@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:last_pod_player/last_pod_player.dart';
 import 'package:skibidiwartube/cubit/following/following_channel.dart';
 import 'package:skibidiwartube/data/models/subscribed.dart';
 import 'package:skibidiwartube/views/screens/channel/channel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:pod_player/pod_player.dart';
 import 'package:youtube_scrape_api/models/video_page.dart';
 
 class ChannelDetail extends StatelessWidget {

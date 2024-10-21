@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:in_app_review/in_app_review.dart';
 import 'package:skibidiwartube/utils/constants/constants.dart';
 import 'package:skibidiwartube/views/screens/root/root_bottom_nav.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +16,6 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash> {
   bool isReady = true;
-  final InAppReview inAppReview = InAppReview.instance;
 
   Future checkNetwork() async {
     try {
@@ -125,7 +122,6 @@ class _SplashState extends State<Splash> {
             TextButton(
               onPressed: () {
                 Get.back();
-                inAppReview.openStoreListing(appStoreId: newPackage);
                 SystemChannels.platform.invokeMethod('SystemNavigator.pop');
               },
               child: Text("INSTALL",

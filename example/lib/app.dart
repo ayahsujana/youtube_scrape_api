@@ -75,10 +75,9 @@ class _MyAppState extends State<MyApp> {
                 colorScheme: lightColorScheme,
                 dialogTheme: dialogTheme,
                 timePickerTheme: timePickerTheme,
-                useMaterial3: true,
                 appBarTheme: appBarThemeLight(lightColorScheme),
-                scaffoldBackgroundColor: lightColorScheme.background,
-                dialogBackgroundColor: lightColorScheme.background,
+                scaffoldBackgroundColor: lightColorScheme.surface,
+                dialogBackgroundColor: lightColorScheme.surface,
                 navigationBarTheme: navigationBarThemeData(
                   lightColorScheme,
                   lightTextTheme,
@@ -109,8 +108,8 @@ class _MyAppState extends State<MyApp> {
                 dialogTheme: dialogTheme,
                 timePickerTheme: timePickerTheme,
                 appBarTheme: appBarThemeDark(darkColorScheme),
-                scaffoldBackgroundColor: darkColorScheme.background,
-                dialogBackgroundColor: darkColorScheme.background,
+                scaffoldBackgroundColor: darkColorScheme.surface,
+                dialogBackgroundColor: darkColorScheme.surface,
                 navigationBarTheme: navigationBarThemeData(
                   darkColorScheme,
                   darkTextTheme,
