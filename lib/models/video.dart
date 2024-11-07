@@ -64,15 +64,18 @@ class Video {
             ?['shortViewCountText']?['simpleText'];
       }
       return Video(
-          videoId: map?['richItemRenderer']['content']['videoRenderer']
-              ?['videoId'],
-          duration: lengthText?['simpleText'],
-          title: map?['richItemRenderer']['content']['videoRenderer']?['title']
-              ?['runs']?[0]?['text'],
-          channelName: '',
-          thumbnails: thumbnails,
-          views: viewers,
-          uploadDate: uploadDates);
+        videoId: map?['richItemRenderer']['content']['videoRenderer']
+                ?['videoId'] ??
+            '',
+        duration: lengthText?['simpleText'] ?? '',
+        title: map?['richItemRenderer']['content']['videoRenderer']?['title']
+                ?['runs']?[0]?['text'] ??
+            '',
+        channelName: '',
+        thumbnails: thumbnails,
+        views: viewers ?? '',
+        uploadDate: uploadDates ?? '',
+      );
     } else if (map?.containsKey("videoRenderer") ?? false) {
       //Trending and search videos
       var uploadDate = map?['videoRenderer']?['publishedTimeText'];
@@ -93,16 +96,17 @@ class Video {
         uploadDates = '';
       }
       return Video(
-          videoId: map?['videoRenderer']?['videoId'],
-          duration: (lengthText == null) ? 'LIVE' : lengthText?['simpleText'],
-          title: map?['videoRenderer']?['title']?['runs']?[0]?['text'],
-          channelName: map?['videoRenderer']['longBylineText']['runs'][0]
-              ['text'],
+          videoId: map?['videoRenderer']?['videoId'] ?? '',
+          duration:
+              (lengthText == null) ? 'LIVE' : lengthText?['simpleText'] ?? '',
+          title: map?['videoRenderer']?['title']?['runs']?[0]?['text'] ?? '',
+          channelName:
+              map?['videoRenderer']['longBylineText']['runs'][0]['text'] ?? '',
           thumbnails: thumbnails,
           views: (lengthText == null)
               ? "Views ${map!['videoRenderer']['viewCountText']['runs'][0]['text']}"
               : simpleText,
-          uploadDate: uploadDates);
+          uploadDate: uploadDates ?? '');
     } else if (map?.containsKey("compactVideoRenderer") ?? false) {
       //Related videos
       var uploadDate = map?['compactVideoRenderer']['publishedTimeText'];
@@ -131,14 +135,17 @@ class Video {
             map?['compactVideoRenderer']?['shortViewCountText']?['simpleText'];
       }
       return Video(
-          videoId: map?['compactVideoRenderer']['videoId'],
-          title: map?['compactVideoRenderer']?['title']?['simpleText'],
-          duration: (lengthText == null) ? 'LIVE' : lengthText?['simpleText'],
-          thumbnails: thumbnails,
-          channelName: map?['compactVideoRenderer']?['shortBylineText']?['runs']
-              ?[0]?['text'],
-          views: viewers,
-          uploadDate: uploadDates);
+        videoId: map?['compactVideoRenderer']['videoId'] ?? '',
+        title: map?['compactVideoRenderer']?['title']?['simpleText'] ?? '',
+        duration:
+            (lengthText == null) ? 'LIVE' : lengthText?['simpleText'] ?? '',
+        thumbnails: thumbnails,
+        channelName: map?['compactVideoRenderer']?['shortBylineText']?['runs']
+                ?[0]?['text'] ??
+            '',
+        views: viewers ?? '',
+        uploadDate: uploadDates ?? '',
+      );
     } else if (map?.containsKey("gridVideoRenderer") ?? false) {
       String? simpleText =
           map?['gridVideoRenderer']['shortViewCountText']?['simpleText'];

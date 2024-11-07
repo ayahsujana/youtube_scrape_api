@@ -65,10 +65,12 @@ class ChannelData {
     return ChannelData(
         videosList: videoList,
         channel: ChannelPage(
-            channelName: channelName,
+            // ignore: unnecessary_null_comparison
+            channelName: (channelName != null) ? channelName : " ",
             subscribers: (subscribers != null) ? subscribers : " ",
             videoCounts: (videoCounts != null) ? videoCounts : " ",
+            // ignore: unnecessary_null_comparison
             avatar: (avatar != null) ? avatar : " ",	
-            banner: banner));
+            banner: (banner != null) ? banner : " "));
   }
 }

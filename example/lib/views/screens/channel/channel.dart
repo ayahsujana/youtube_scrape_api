@@ -89,119 +89,144 @@ class _ChannelContentPageState extends State<ChannelContentPage> {
     return Stack(
       children: [
         Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            widget.channelData.channel.banner != null
-                ? Container(
-                    height: 100,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: Image.network(
-                                    widget.channelData.channel.banner!)
-                                .image,
-                            fit: BoxFit.cover)),
-                  )
-                : Container(),
+            // widget.channelData.channel.banner != null
+            //     ? Container(
+            //         height: 100,
+            //         width: double.infinity,
+            //         decoration: BoxDecoration(
+            //             image: DecorationImage(
+            //                 image: Image.network(
+            //                         widget.channelData.channel.banner!)
+            //                     .image,
+            //                 fit: BoxFit.cover)),
+            //       )
+            //     : Container(),
             Container(
-              height: 75,
-              color: Color(defaultColor).withOpacity(0.5),
-              padding: const EdgeInsets.only(
-                  left: 15, right: 15, bottom: 10, top: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 60,
-                    width: 60,
-                    alignment: Alignment.center,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                    ),
-                    child: Container(
-                        height: 53,
-                        width: 53,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                                image: Image.network(
-                                        widget.channelData.channel.avatar!)
-                                    .image,
-                                fit: BoxFit.cover))),
+              height: 100,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: Image.network(widget.channelData.channel.banner!)
+                          .image,
+                      fit: BoxFit.cover)),
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.center,
+                    colors: [Colors.black, Colors.black38],
                   ),
-                  const SizedBox(
-                    width: 10.0,
-                  ),
-                  Expanded(
-                    child: SizedBox(
-                      height: 60,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            widget.channelData.channel.channelName!,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w600),
-                          ),
-                          Text(
-                            widget.channelData.channel.subscribers!,
-                            style: const TextStyle(fontSize: 11),
-                          ),
-                          Text(
-                            widget.channelData.channel.videoCounts!,
-                            style: const TextStyle(fontSize: 11),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  BlocBuilder<FollowingCubit, List<Subscribed?>>(
-                    builder: (context, state) {
-                      bool followState =
-                          context.watch<FollowingCubit>().isFollowing(follow);
-                      return InkWell(
-                        onTap: () => context
-                            .read<FollowingCubit>()
-                            .toggleFollowing(follow),
-                        child: Center(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 6),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                        height: 60,
+                        width: 60,
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                        child: Container(
+                            height: 53,
+                            width: 53,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: followState
-                                  ? Colors.grey
-                                  : const Color.fromARGB(255, 247, 19, 3),
-                            ),
-                            child: followState
-                                ? const Text(
-                                    "UnFollow",
-                                    maxLines: 1,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                : const Text(
-                                    "Follow",
-                                    maxLines: 1,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                    image: Image.network(
+                                            widget.channelData.channel.avatar!)
+                                        .image,
+                                    fit: BoxFit.cover))),
+                      ),
+                      const SizedBox(
+                        width: 10.0,
+                      ),
+                      Expanded(
+                        child: SizedBox(
+                          height: 60,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                widget.channelData.channel.channelName!,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                widget.channelData.channel.subscribers!,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              Text(
+                                widget.channelData.channel.videoCounts!+'s',
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ],
                           ),
                         ),
-                      );
-                    },
+                      ),
+                      BlocBuilder<FollowingCubit, List<Subscribed?>>(
+                        builder: (context, state) {
+                          bool followState = context
+                              .watch<FollowingCubit>()
+                              .isFollowing(follow);
+                          return InkWell(
+                            onTap: () => context
+                                .read<FollowingCubit>()
+                                .toggleFollowing(follow),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 6),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: followState
+                                    ? Colors.grey
+                                    : const Color.fromARGB(255, 247, 19, 3),
+                              ),
+                              child: followState
+                                  ? const Text(
+                                      "UnFollow",
+                                      maxLines: 1,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  : const Text(
+                                      "Follow",
+                                      maxLines: 1,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
             Expanded(

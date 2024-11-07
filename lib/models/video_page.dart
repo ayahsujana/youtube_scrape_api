@@ -63,9 +63,9 @@ class VideoPage {
       likers = '0';
     } else {
       likers = likes['segmentedLikeDislikeButtonViewModel']
-                ['likeButtonViewModel']['likeButtonViewModel']
-            ['toggleButtonViewModel']['toggleButtonViewModel']
-        ['defaultButtonViewModel']['buttonViewModel']['title'];
+                  ['likeButtonViewModel']['likeButtonViewModel']
+              ['toggleButtonViewModel']['toggleButtonViewModel']
+          ['defaultButtonViewModel']['buttonViewModel']['title'];
     }
     if (views != null) {
       viewers = views?[0]['text'] + views?[1]['text'];
@@ -77,21 +77,36 @@ class VideoPage {
           ['videoViewCountRenderer']['viewCount']['simpleText'];
     }
     return VideoPage(
-        videoId: videoId,
-        title: map?['results']['results']['contents'][0]
-            ['videoPrimaryInfoRenderer']['title']['runs'][0]['text'],
-        channelName: map?['results']['results']['contents'][1]['videoSecondaryInfoRenderer']
-            ['owner']['videoOwnerRenderer']['title']['runs'][0]['text'],
-        viewCount: viewers,
-        subscribeCount: map?['results']?['results']?['contents']?[1]
-                ?['videoSecondaryInfoRenderer']?['owner']?['videoOwnerRenderer']
-            ?['subscriberCountText']?['simpleText'],
-        likeCount: likers,
-        unlikeCount: '',
-        description: map?['results']?['results']?['contents']?[1]
-            ?['videoSecondaryInfoRenderer']?['attributedDescription']?['content'],
-        date: map?['results']['results']['contents'][0]['videoPrimaryInfoRenderer']['dateText']['simpleText'],
-        channelThumb: map?['results']['results']['contents'][1]['videoSecondaryInfoRenderer']['owner']['videoOwnerRenderer']['thumbnail']['thumbnails'][1]['url'],
-        channelId: map?['results']['results']['contents'][1]['videoSecondaryInfoRenderer']['owner']['videoOwnerRenderer']['navigationEndpoint']['browseEndpoint']['browseId']);
+      videoId: videoId,
+      title: map?['results']['results']['contents'][0]
+              ['videoPrimaryInfoRenderer']['title']['runs'][0]['text'] ??
+          '',
+      channelName: map?['results']['results']['contents'][1]
+                  ['videoSecondaryInfoRenderer']['owner']['videoOwnerRenderer']
+              ['title']['runs'][0]['text'] ??
+          '',
+      viewCount: viewers ?? '',
+      subscribeCount: map?['results']?['results']?['contents']?[1]
+                  ?['videoSecondaryInfoRenderer']?['owner']
+              ?['videoOwnerRenderer']?['subscriberCountText']?['simpleText'] ??
+          '',
+      likeCount: likers ?? '',
+      unlikeCount: '',
+      description: map?['results']?['results']?['contents']?[1]
+                  ?['videoSecondaryInfoRenderer']?['attributedDescription']
+              ?['content'] ??
+          '',
+      date: map?['results']['results']['contents'][0]
+              ['videoPrimaryInfoRenderer']['dateText']['simpleText'] ??
+          '',
+      channelThumb: map?['results']['results']['contents'][1]
+                  ['videoSecondaryInfoRenderer']['owner']['videoOwnerRenderer']
+              ['thumbnail']['thumbnails'][1]['url'] ??
+          '',
+      channelId: map?['results']['results']['contents'][1]
+                  ['videoSecondaryInfoRenderer']['owner']['videoOwnerRenderer']
+              ['navigationEndpoint']['browseEndpoint']['browseId'] ??
+          '',
+    );
   }
 }

@@ -1,3 +1,9 @@
+## [0.1.0]
+    - Fixes if script is null
+
+## [0.0.9]
+    - Update some library
+
 ## [0.0.7]
 
     - Fixes name channel
